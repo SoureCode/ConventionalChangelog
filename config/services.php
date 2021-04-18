@@ -11,6 +11,7 @@ use SoureCode\ConventionalChangelog\Writer\MarkdownWriter;
 use SoureCode\ConventionalChangelog\Writer\MarkdownWriterInterface;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symplify\GitWrapper\GitWrapper;
+use function Symfony\Component\DependencyInjection\Loader\Configurator\param;
 use function Symfony\Component\DependencyInjection\Loader\Configurator\service;
 
 return function (ContainerConfigurator $configurator) {
@@ -63,6 +64,7 @@ return function (ContainerConfigurator $configurator) {
         ->args(
             [
                 service(GitWrapper::class),
+                param('kernel.working_directory'),
             ]
         )
         ->lazy();

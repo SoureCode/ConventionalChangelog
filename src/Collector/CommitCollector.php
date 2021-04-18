@@ -10,9 +10,12 @@ class CommitCollector
 
     private GitWrapper $gitWrapper;
 
-    public function __construct(GitWrapper $gitWrapper)
+    private string $workingDirectory;
+
+    public function __construct(GitWrapper $gitWrapper, string $workingDirectory)
     {
         $this->gitWrapper = $gitWrapper;
+        $this->workingDirectory = $workingDirectory;
     }
 
     /**
@@ -23,7 +26,7 @@ class CommitCollector
      */
     public function collect(string $from, string $to): array
     {
-        $gitWorkingCopy = $this->gitWrapper->workingCopy(getcwd());
+        $gitWorkingCopy = $this->gitWrapper->workingCopy($this->workingDirectory);
         $gitCommits = $gitWorkingCopy->commits();
 
         $commitHashes = $gitCommits->fetchRange($from, $to);
