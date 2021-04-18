@@ -1,0 +1,27 @@
+name: "Check Commits"
+
+on:
+    pull_request:
+
+jobs:
+    convetional-commits:
+        name: "Conventional Commits"
+        runs-on: ubuntu-latest
+        steps:
+            -   name: "Checkout"
+                uses: "actions/checkout@v2"
+                with:
+                    fetch-depth: 0
+
+            -   name: "Install PHP"
+                uses: "shivammathur/setup-php@v2"
+                with:
+                    coverage: "pcov"
+                    php-version: "8.0"
+                    ini-values: memory_limit=-1
+
+            -   name: "Install conventional-commits"
+                run: "mkdir -p tools && wget https://github.com/SoureCode/ConventionalCommits/releases/download/v0.1.1/conventional-commits.phar -O ./tools/conventional-commits.phar"
+
+            -   name: "Check commits"
+                run: "php ./tools/conventional-commits.phar validate:commit -vv remotes/origin/$GITHUB_BASE_REF...remotes/origin/$GITHUB_HEAD_REF"
