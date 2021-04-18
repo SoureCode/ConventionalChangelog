@@ -30,6 +30,7 @@
         "symfony/validator": "^5.2",
         "symfony/yaml": "^5.2",
         "symfony/finder": "^5.2",
+        "sourecode/conventional-commits": "^0.1.1",
         "symplify/git-wrapper": "^9.2.15"
     },
     "require-dev": {

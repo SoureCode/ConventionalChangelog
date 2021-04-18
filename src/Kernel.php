@@ -55,8 +55,6 @@ class Kernel
         $containerBuilder = $this->buildContainer();
         $containerBuilder->compile();
 
-        $containerBuilder->set(GitWrapper::class, new GitWrapper());
-
         $this->container = $containerBuilder;
     }
 
